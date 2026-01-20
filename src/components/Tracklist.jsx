@@ -1,11 +1,15 @@
 import Track from './Track.jsx';
 
-function Tracklist( { tracks } ){
+function Tracklist( { tracks, onAdd } ){
 
     return (
         <div className="Tracklist">
             {tracks.map(track => (
-                <Track track={track} />
+                <Track 
+                track={track} 
+                key={track.id} 
+                onAdd={onAdd}
+                />
             ))}
         </div>
     );

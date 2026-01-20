@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import reactLogo from '../assets/react.svg'
-import viteLogo from '../../public/vite.svg'
 import '../App.css'
 
 import Playlist from './Playlist.jsx'
@@ -18,13 +16,17 @@ function App() {
   ]);
 
   // Handler to update search results
-  const setSearchResultsHandler = (results) => {
-    setSearchResults(results);
+  const setSearchResultsHandler = (searchResults) => {
+    setSearchResults(searchResults);
   }
 
   // State to hold playlist tracks
   const [playlistTracks, setPlaylistTracks] = useState([]);
 
+  // Handler to update the playlist to add a track
+  const addTrack = (track) => {
+    setPlaylistTracks([...playlistTracks, track]);
+  }
 
 
   // JSX to render the App component
@@ -41,13 +43,13 @@ function App() {
         </div>
 
         <div className="app-content">
-          <SearchResults results={searchResults}/>
-          <Playlist />
+          <SearchResults tracks={searchResults} onAdd={addTrack}/>
+          <Playlist currentPlaylist={playlistTracks}/>
         </div>
 
       </main>
     </>
-  )
+  );
 }
 
 export default App

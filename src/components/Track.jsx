@@ -1,7 +1,11 @@
 import react from 'react';
 
-function Track( {track} ){
-
+function Track( {track, onAdd} ){
+    const addTrack = () => {
+        if(onAdd){
+            onAdd(track);
+        }
+    }
 
     return (
         <div className="Track">
@@ -9,7 +13,7 @@ function Track( {track} ){
                 <h3>{track.name}</h3>
                 <p>{track.artist} | {track.album}</p>
             </div>
-            <button className="Track-action">+</button>
+            {onAdd && <button className="Track-action" onClick={addTrack}>+</button>}
         </div>
 
     );

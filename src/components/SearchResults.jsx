@@ -1,9 +1,10 @@
+import Tracklist from './Tracklist.jsx';
 
-function SearchResults( { results } ){
+function SearchResults( { tracks, onAdd } ){
     return (
         <div className="SearchResults">
             <h2>Results</h2>
-            <Tracklist tracks={results} />
+            <Tracklist tracks={tracks} onAdd={onAdd}/>
         </div>
     );
 }

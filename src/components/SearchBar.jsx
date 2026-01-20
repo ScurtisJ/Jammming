@@ -3,13 +3,13 @@
 function SearchBar({ onSearch }) {
   const handleSearch = (event) => {
     event.preventDefault();
-    
+
     const searchTerm = event.target.elements.searchInput.value;
     onSearch(searchTerm);
   };
     return (
     <form onSubmit={handleSearch}>
-      <input type="text" name="searchInput" placeholder="Enter a song, artist, or album" />
+      <input className="search-input" type="text" name="searchInput" placeholder="Enter a song, artist, or album" />
       <button type="submit">SEARCH</button>
     </form>
     );
