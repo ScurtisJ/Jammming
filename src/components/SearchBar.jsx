@@ -8,7 +8,7 @@ function SearchBar({ onSearch }) {
     onSearch(searchTerm);
   };
     return (
-    <form onSubmit={handleSearch}>
+    <form className="search-bar" onSubmit={handleSearch}>
       <input className="search-input" type="text" name="searchInput" placeholder="Enter a song, artist, or album" />
       <button type="submit">SEARCH</button>
     </form>
