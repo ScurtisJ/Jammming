@@ -1,9 +1,10 @@
-import react from 'react';
 import Tracklist from './Tracklist';
 
 function Playlist({currentPlaylist, onRemove, playlistName, updatePlaylistName}) {
 
     const handleNameChange = (event) => {
+        event.preventDefault();
+
         updatePlaylistName(event.target.value);
     }
 

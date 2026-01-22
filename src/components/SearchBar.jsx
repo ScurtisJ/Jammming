@@ -1,10 +1,8 @@
-
-
 function SearchBar({ onSearch }) {
   const handleSearch = (event) => {
     event.preventDefault();
 
-    const searchTerm = event.target.elements.searchInput.value;
+    const searchTerm = (event.target.elements.searchInput.value);
     onSearch(searchTerm);
   };
     return (

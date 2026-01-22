@@ -1,5 +1,3 @@
-import react from 'react';
-
 function Track( {track, onAdd, onRemove} ){
     const addTrack = () => {
         if(onAdd){
