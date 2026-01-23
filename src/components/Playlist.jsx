@@ -1,20 +1,12 @@
 import Tracklist from './Tracklist';
 
-function Playlist({currentPlaylist, onRemove, playlistName, updatePlaylistName}) {
+function Playlist({currentPlaylist, onRemove, playlistName, updatePlaylistName, handleSave}) {
 
     const handleNameChange = (event) => {
         event.preventDefault();
-
         updatePlaylistName(event.target.value);
     }
 
-    const handleSave = () => {
-        if(currentPlaylist.length === 0){
-            alert("Cannot add an Empty Playlist!");
-            return;
-        } 
-        alert("Playlist Saved!");
-    }
     return (
         <div className="playlist">
             <h2><input

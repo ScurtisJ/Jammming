@@ -6,6 +6,7 @@ import SearchBar from './SearchBar.jsx'
 import SearchResults from './SearchResults.jsx'
 import spotifyLogo from '../assets/spotify-logo.png'
 import mockResults from '../assets/mock-results.jsx'  
+import ProgressBar from './ProgressBar.jsx'
 
 
 function App() {
@@ -61,6 +62,34 @@ function App() {
     setPlaylistTracks(updatedPlaylist);
   }
 
+  //create variable to manage loading state
+  const [isVisible,setIsVisible] = useState(false);
+
+  //Handle's the save playlist action
+  const handleSave = () => {
+    if(playlistTracks.length === 0){
+        alert("Cannot add an Empty Playlist!");
+        return;
+    } 
+
+    //Show progress bar
+    setIsVisible(true); 
+
+    //Simulate saving process with a timeout
+    setTimeout(() => {
+      alert(`Playlist "${playlistName}" saved to your Spotify account!`);
+
+    //Reset playlist after saving
+      setPlaylistName("My Jammming Playlist");
+      setPlaylistTracks([]);
+    }, 2000);
+
+    //Hide progress bar after 3 seconds
+    setTimeout(() => {
+      setIsVisible(false); 
+    }, 5000);
+
+  }
 
   // JSX to render the App component
   return (
@@ -84,7 +113,12 @@ function App() {
             onRemove={removeTrack} 
             playlistName={playlistName} 
             updatePlaylistName={updatePlaylistName}
+            handleSave={handleSave}
           />
+        </div>
+
+        <div className={isVisible ? "progress-bar" : "progress-bar-invisible"}>
+          <ProgressBar />
         </div>
 
       </main>
