@@ -65,8 +65,19 @@ function App() {
   //create variable to manage loading state
   const [isVisible,setIsVisible] = useState(false);
 
+
+  //delay helper function
+  const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+  //create progress bar visibility state
+  const [progress, setProgress] = useState({
+    percent: 0,
+    message: ''
+  });
+
+
   //Handle's the save playlist action
-  const handleSave = () => {
+  const handleSave = async () => {
     if(playlistTracks.length === 0){
         alert("Cannot add an Empty Playlist!");
         return;
@@ -75,20 +86,34 @@ function App() {
     //Show progress bar
     setIsVisible(true); 
 
-    //Simulate saving process with a timeout
-    setTimeout(() => {
-      alert(`Playlist "${playlistName}" saved to your Spotify account!`);
+    //Simulate upload process with delays
+    setProgress({percent: 0, message: 'Uploading to Spotify...'});
+    await delay(1000);
 
-    //Reset playlist after saving
-      setPlaylistName("My Jammming Playlist");
-      setPlaylistTracks([]);
-    }, 2000);
 
-    //Hide progress bar after 3 seconds
-    setTimeout(() => {
-      setIsVisible(false); 
-    }, 5000);
+    //Simulate Creating Playlist
+    setProgress({percent: 33, message: 'Creating Playlist...'});
+    await delay(1000);
 
+    //Simulate Adding Tracks
+    setProgress({ percent: 66, message:`Adding Tracks to ${playlistName}...`});
+    await delay(1000);
+
+    //Hide progress bar after completion
+    setProgress({ percent: 100, message:`Upload Complete!`});
+    await delay(1000);
+
+    alert(`Playlist "${playlistName}" is saved to your Spotify account!`);
+
+    //Reset playlist
+    setPlaylistName("My Jammming Playlist");
+    setPlaylistTracks([]);
+
+
+    //Hide progress bar after short delay
+    await delay(500);
+    setIsVisible(false);
+    setProgress({ percent: 0, message:``});
   }
 
   // JSX to render the App component
@@ -118,7 +143,7 @@ function App() {
         </div>
 
         <div className={isVisible ? "progress-bar" : "progress-bar-invisible"}>
-          <ProgressBar />
+          <ProgressBar progress={progress.percent} progressMessage={progress.message}/>
         </div>
 
       </main>
